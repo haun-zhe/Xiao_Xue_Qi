@@ -27,7 +27,7 @@ from response import *
 # template_folder 指定模板路径，以便 render_template 能正确渲染 index.html
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'old_care_flask'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:wbyzwmml555@localhost:3306/old_care_flask'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Jbc123698745123@localhost:3306/old_care_flask'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:63637072@localhost:3306/old_care_flask'
 # 每次请求结束后会自动提交数据库中的改动
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
@@ -442,7 +442,7 @@ def get_events():
 
 
 # 获取区域入侵检测异常数据
-@app.route('/table_intrusion', methods=['GET'])
+@app.route('/table_instrusion', methods=['GET'])
 def get_intrusion():
     result_list = []
 
