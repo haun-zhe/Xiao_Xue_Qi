@@ -47,7 +47,7 @@
           <div>
             <el-card style="position: relative;height: 230px;">
               <span class="title" >老人性别比例</span><br>
-              <span class="data">37%</span><br><br>
+<!--              <span class="data">%</span><br><br>-->
               <div id="genderRate" style="height: 160% ;width: 100%"></div>
             </el-card>
           </div>
@@ -301,7 +301,7 @@ export default {
           type: 'pie',   //echarts图的类型   pie代表饼图
           eight: 100,
           weight: 100,
-          radius: '70%',   //饼图中饼状部分的大小所占整个父元素的百分比
+          radius: '50%',   //饼图中饼状部分的大小所占整个父元素的百分比
           center: ['50%', '50%'],   //整个饼图在整个父元素中的位置
 
           itemStyle: {
@@ -325,7 +325,7 @@ export default {
         //鼠标划过时饼状图上显示的数据
         tooltip: {
           trigger: 'item',
-          formatter: "{a} <br/>{b} : {7} (37%)"
+          formatter: "{a} <br/>{b} : {3} (50%)"
         },
         // 图例 标注各种颜色代表的模块
         legend: {

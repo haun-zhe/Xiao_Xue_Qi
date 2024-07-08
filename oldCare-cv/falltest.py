@@ -292,9 +292,9 @@ def checkingfalldetection(grabbed, image, model=None):
 
 
 def fall_main():
-    # vs = cv2.VideoCapture(0)
-    url = 'rtmp://182.92.210.204:1935/myapp/'
-    vs = cv2.VideoCapture(url)
+    vs = cv2.VideoCapture(0)
+    # url = 'rtmp://182.92.210.204:1935/myapp/'
+    # vs = cv2.VideoCapture(url)
 
     print('[INFO] 开始检测是否有人摔倒...')
     # fall_model = load_model(model_path)

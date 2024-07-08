@@ -20,14 +20,14 @@
               <el-menu-item-group>
                 <el-menu-item index="/home/camera1">
                   <i class="el-icon-video-camera-solid"></i>
-                  <span slot="title">摄像头1</span>
+                  <span slot="title">跌倒监控</span>
                 </el-menu-item>
               </el-menu-item-group>
               <!-- 摄像头2 -->
               <el-menu-item-group>
                 <el-menu-item index="/home/camera2">
                   <i class="el-icon-video-camera-solid"></i>
-                  <span slot="title">摄像头2</span>
+                  <span slot="title">禁区监控</span>
                 </el-menu-item>
               </el-menu-item-group>
 <!--              &lt;!&ndash; 摄像头3 &ndash;&gt;-->
