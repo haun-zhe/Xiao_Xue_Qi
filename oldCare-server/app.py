@@ -420,91 +420,95 @@ def get_events():
 
 
 # 老人情感检测数据
-@app.route('/table_facial_expression', methods=['GET'])
-# @login_required
-def get_facial_expression():
-    result_list = []
-
-    sql = text("SELECT oldperson_id,username, event_location, event_date, event_desc, event_image_dir FROM oldPerson_info, event_info WHERE event_info.oldperson_id = oldPerson_info.ID AND event_type=0")
-
-    for result in db.session.execute(sql):
-        with open(result[5], 'rb') as f:
-            data = f.read()
-            encode_str = "data:image/jpg;base64," + str(base64.b64encode(data), 'utf-8')
-            result_dict = {'oldperson_id':result[0],'userName': result[1], 'eventLocation': result[2], 'eventDate': str(result[3]),
-                           'eventDesc': result[4], 'eventPhoto': encode_str}
-            result_list.append(result_dict)
-
-    response = DataResponse(code=200, data=result_list, msg='Succeed to get facial expression events!')
-    response = json.dumps(response.__dict__)
-
-    return response
+# @app.route('/table_facial_expression', methods=['GET'])
+# # @login_required
+# def get_facial_expression():
+#     result_list = []
+#
+#     sql = text("SELECT oldperson_id,username, event_location, event_date, event_desc, event_image_dir FROM oldPerson_info, event_info WHERE event_info.oldperson_id = oldPerson_info.ID AND event_type=0")
+#
+#     for result in db.session.execute(sql):
+#         with open(result[5], 'rb') as f:
+#             data = f.read()
+#             encode_str = "data:image/jpg;base64," + str(base64.b64encode(data), 'utf-8')
+#             result_dict = {'oldperson_id':result[0],'userName': result[1], 'eventLocation': result[2], 'eventDate': str(result[3]),
+#                            'eventDesc': result[4], 'eventPhoto': encode_str}
+#             result_list.append(result_dict)
+#
+#     response = DataResponse(code=200, data=result_list, msg='Succeed to get facial expression events!')
+#     response = json.dumps(response.__dict__)
+#
+#     return response
 
 
 # 获取区域入侵检测异常数据
-@app.route('/table_instrusion', methods=['GET'])
-# @login_required
+@app.route('/table_intrusion', methods=['GET'])
 def get_intrusion():
     result_list = []
 
     sql = text("SELECT event_location, event_date, event_image_dir FROM event_info WHERE event_type=4")
 
     for result in db.session.execute(sql):
-        with open(result[2], 'rb') as f:
-            data = f.read()
-            encode_str = "data:image/jpg;base64," + str(base64.b64encode(data), 'utf-8')
-            result_dict = {'eventLocation': result[0], 'eventDate': str(result[1]), 'eventPhoto': encode_str}
+        file_path = result[2]
+        if os.path.exists(file_path):
+            with open(file_path, 'rb') as f:
+                data = f.read()
+                encode_str = "data:image/jpg;base64," + base64.b64encode(data).decode('utf-8')
+                result_dict = {'eventLocation': result[0], 'eventDate': str(result[1]), 'eventPhoto': encode_str}
+                result_list.append(result_dict)
+        else:
+            result_dict = {'eventLocation': result[0], 'eventDate': str(result[1]), 'eventPhoto': 'File not found'}
             result_list.append(result_dict)
 
     response = DataResponse(code=200, data=result_list, msg='Succeed to get intrusion events!')
-    response = json.dumps(response.__dict__)
-
-    return response
+    return jsonify(response.__dict__)
 
 
 # 获取老人摔倒检测数据
 @app.route('/table_fall', methods=['GET'])
-# @login_required
 def get_fall():
     result_list = []
 
     sql = text("SELECT event_location, event_date, event_image_dir FROM event_info WHERE event_type=3")
 
     for result in db.session.execute(sql):
-        with open(result[2], 'rb') as f:
-            data = f.read()
-            encode_str = "data:image/jpg;base64," + str(base64.b64encode(data), 'utf-8')
-            result_dict = {'eventLocation': result[0], 'eventDate': str(result[1]), 'eventPhoto': encode_str}
+        file_path = result[2]
+        if os.path.exists(file_path):
+            with open(file_path, 'rb') as f:
+                data = f.read()
+                encode_str = "data:image/jpg;base64," + base64.b64encode(data).decode('utf-8')
+                result_dict = {'eventLocation': result[0], 'eventDate': str(result[1]), 'eventPhoto': encode_str}
+                result_list.append(result_dict)
+        else:
+            result_dict = {'eventLocation': result[0], 'eventDate': str(result[1]), 'eventPhoto': 'File not found'}
             result_list.append(result_dict)
 
     response = DataResponse(code=200, data=result_list, msg='Succeed to get fall events!')
-    response = json.dumps(response.__dict__)
-
-    return response
+    return jsonify(response.__dict__)
 
 
 # 获取老人与护工交互检测异常数据
-@app.route('/table_interaction', methods=['GET'])
-# @login_required
-def get_interaction():
-    result_list = []
-
-    sql = text("SELECT oldperson_id, username, volunteer_id, `name`, event_location, event_date, event_image_dir FROM event_info, volunteer_info, oldPerson_info " \
-          "WHERE event_type=1 AND event_info.oldperson_id = oldPerson_info.ID AND event_info.volunteer_id = volunteer_info.id")
-
-    for result in db.session.execute(sql):
-        with open(result[6], 'rb') as f:
-            data = f.read()
-            encode_str = "data:image/jpg;base64," + str(base64.b64encode(data), 'utf-8')
-            result_dict = {'oldPersonId': result[0], 'oldPersonName': result[1], 'volunteerId': result[2],
-                           'volunteerName': result[3],
-                           'eventLocation': result[4], 'eventDate': str(result[5]), 'eventPhoto': encode_str}
-            result_list.append(result_dict)
-
-    response = DataResponse(code=200, data=result_list, msg='Succeed to get interaction events!')
-    response = json.dumps(response.__dict__)
-
-    return response
+# @app.route('/table_interaction', methods=['GET'])
+# # @login_required
+# def get_interaction():
+#     result_list = []
+#
+#     sql = text("SELECT oldperson_id, username, volunteer_id, `name`, event_location, event_date, event_image_dir FROM event_info, volunteer_info, oldPerson_info " \
+#           "WHERE event_type=1 AND event_info.oldperson_id = oldPerson_info.ID AND event_info.volunteer_id = volunteer_info.id")
+#
+#     for result in db.session.execute(sql):
+#         with open(result[6], 'rb') as f:
+#             data = f.read()
+#             encode_str = "data:image/jpg;base64," + str(base64.b64encode(data), 'utf-8')
+#             result_dict = {'oldPersonId': result[0], 'oldPersonName': result[1], 'volunteerId': result[2],
+#                            'volunteerName': result[3],
+#                            'eventLocation': result[4], 'eventDate': str(result[5]), 'eventPhoto': encode_str}
+#             result_list.append(result_dict)
+#
+#     response = DataResponse(code=200, data=result_list, msg='Succeed to get interaction events!')
+#     response = json.dumps(response.__dict__)
+#
+#     return response
 
 
 # 添加一条事件记录
