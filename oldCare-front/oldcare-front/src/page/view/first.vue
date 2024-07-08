@@ -43,37 +43,37 @@
       <br><br>
       <el-row :gutter="20">
         <!-- 老人性别比例 -->
-        <el-col :span="12">
+        <el-col :span="24">
           <div>
             <el-card style="position: relative;height: 230px;">
               <span class="title" >老人性别比例</span><br>
-              <span class="data">{{rate}}%</span><br><br>
+              <span class="data">37%</span><br><br>
               <div id="genderRate" style="height: 160% ;width: 100%"></div>
             </el-card>
           </div>
         </el-col>
         <!-- 今日情绪占比 -->
-        <el-col :span="12">
-          <div>
-            <el-card style="position: relative;height: 230px;">
-              <span class="title">今日情绪占比</span>
-              <div id="emotion" style="height: 230%;width: 100%"></div>
-            </el-card>
-          </div>
-        </el-col>
+<!--        <el-col :span="12">-->
+<!--          <div>-->
+<!--            <el-card style="position: relative;height: 230px;">-->
+<!--              <span class="title">今日情绪占比</span>-->
+<!--              <div id="emotion" style="height: 230%;width: 100%"></div>-->
+<!--            </el-card>-->
+<!--          </div>-->
+<!--        </el-col>-->
       </el-row>
     </div>
     <br><br>
     <!-- 日报警闯入统计 -->
-    <el-row>
-      <div>
-        <el-card style="position: relative;height: 430px;">
-          <span class="title">日报警、闯入统计</span>
-          <br>
-          <div id="alert" style="height: 430%;width: 100%" align="center"></div>
-        </el-card>
-      </div>
-    </el-row>
+<!--    <el-row>-->
+<!--      <div>-->
+<!--        <el-card style="position: relative;height: 430px;">-->
+<!--          <span class="title">日报警、闯入统计</span>-->
+<!--          <br>-->
+<!--          <div id="alert" style="height: 430%;width: 100%" align="center"></div>-->
+<!--        </el-card>-->
+<!--      </div>-->
+<!--    </el-row>-->
   </div>
 </template>
 
@@ -97,6 +97,8 @@ export default {
       volNum:0,
       newVolNum:0,
       rate:0,
+      female_OldPeople:0,
+      male_OldPeople:0,
     };
   },
   components: {},
@@ -113,7 +115,7 @@ export default {
           "Content-Type": "application/json;charset=utf-8"
           }
           }).then(res => {
-            
+
             console.info(res.data)
             if (res.status == 200) {
               if (res.data.code ==200) {
@@ -135,15 +137,6 @@ export default {
                 this.volNum = number_volunteer
                 // 在岗护工数
                 this.newVolNum = numberOfActive_volunteer
-                // 情绪数据
-                emotion[0]=res.data.data.emotion.anger
-                console.log("anger"+res.data.data.emotion.anger)
-                emotion[1]=res.data.data.emotion.disgust
-                emotion[2]=res.data.data.emotion.fear
-                emotion[3]=res.data.data.emotion.happiness
-                emotion[4]=res.data.data.emotion.neutral
-                emotion[5]=res.data.data.emotion.sadness
-                emotion[6]=res.data.data.emotion.surprise
                 // 摔倒报警
                 fall[0]=res.data.data.fall.within_four_days
                 fall[1]=res.data.data.fall.within_five_days
@@ -176,122 +169,122 @@ export default {
                   }
                 })
                 // 情绪图
-                emotionChart.setOption({
-                  series: [
-                    {
-                      type: 'bar',
-                      name: '愤怒',
-                      data: [
-                        {value:emotion[0],name:'愤怒'}
-                      ],
-                      barMaxHeight: 20,
-                      label: {
-                        show: true,
-                        position: 'inside'
-                      },
-                    },
-                    {
-                      type: 'bar',
-                      name: '厌恶',
-                      data: [
-                        {value:emotion[1],name:'厌恶'}
-                      ],
-                      barMaxWidth: 20,
-                      label: {
-                        show: true,
-                        position: 'inside'
-                      },
-                    },
-                    {
-                      type: 'bar',
-                      name: '恐慌',
-                    data: [
-                      {value:emotion[2],name:'恐慌'}
-                      ],
-                      barMaxWidth: 20,
-                      label: {
-                        show: true,
-                        position: 'inside'
-                      },
-                    },
-                    {
-                      type: 'bar',
-                      name: '高兴',
-                      data: [
-                        {value:emotion[3],name:'高兴'}
-                      ],
-                      barMaxWidth: 20,
-                      label: {
-                        show: true,
-                        position: 'inside'
-                      },
-                    },
-                    {
-                      type: 'bar',
-                      name: '平静',
-                      data: [
-                      {value:emotion[4],name:'平静'}
-                    ],
-                    barMaxWidth: 20,
-                    label: {
-                      show: true,
-                      position: 'inside'
-                    },
-                  },
-                  {
-                    type: 'bar',
-                    name: '伤心',
-                    data: [
-                    {value:emotion[5],name:'伤心'}
-                    ],
-                    barMaxWidth: 20,
-                    label: {
-                      show: true,
-                      position: 'inside'
-                    },
-                  },
-                  {
-                    type: 'bar',
-                    name: '惊讶',
-                    data: [
-                      {value:emotion[6],name:'惊讶'}
-                    ],
-                    barMaxWidth: 20,
-                    label: {
-                      show: true,
-                      position: 'inside'
-                    },
-                  },
-                ],
-                })
+                // emotionChart.setOption({
+                //   series: [
+                //     {
+                //       type: 'bar',
+                //       name: '愤怒',
+                //       data: [
+                //         {value:emotion[0],name:'愤怒'}
+                //       ],
+                //       barMaxHeight: 20,
+                //       label: {
+                //         show: true,
+                //         position: 'inside'
+                //       },
+                //     },
+                //     {
+                //       type: 'bar',
+                //       name: '厌恶',
+                //       data: [
+                //         {value:emotion[1],name:'厌恶'}
+                //       ],
+                //       barMaxWidth: 20,
+                //       label: {
+                //         show: true,
+                //         position: 'inside'
+                //       },
+                //     },
+                //     {
+                //       type: 'bar',
+                //       name: '恐慌',
+                //     data: [
+                //       {value:emotion[2],name:'恐慌'}
+                //       ],
+                //       barMaxWidth: 20,
+                //       label: {
+                //         show: true,
+                //         position: 'inside'
+                //       },
+                //     },
+                //     {
+                //       type: 'bar',
+                //       name: '高兴',
+                //       data: [
+                //         {value:emotion[3],name:'高兴'}
+                //       ],
+                //       barMaxWidth: 20,
+                //       label: {
+                //         show: true,
+                //         position: 'inside'
+                //       },
+                //     },
+                //     {
+                //       type: 'bar',
+                //       name: '平静',
+                //       data: [
+                //       {value:emotion[4],name:'平静'}
+                //     ],
+                //     barMaxWidth: 20,
+                //     label: {
+                //       show: true,
+                //       position: 'inside'
+                //     },
+                //   },
+                //   {
+                //     type: 'bar',
+                //     name: '伤心',
+                //     data: [
+                //     {value:emotion[5],name:'伤心'}
+                //     ],
+                //     barMaxWidth: 20,
+                //     label: {
+                //       show: true,
+                //       position: 'inside'
+                //     },
+                //   },
+                //   {
+                //     type: 'bar',
+                //     name: '惊讶',
+                //     data: [
+                //       {value:emotion[6],name:'惊讶'}
+                //     ],
+                //     barMaxWidth: 20,
+                //     label: {
+                //       show: true,
+                //       position: 'inside'
+                //     },
+                //   },
+                // ],
+                // })
                 // 摔倒闯入
-                alertChart.setOption({
-                  series: [
-                    {
-                      type: 'bar',
-                      name:'摔倒报警',
-                      show:true,
-                      data: fall,
-                      barGap: '100%',
-                      barCategoryGap: '40%'
-                    },
-                    {
-                      type: 'line',
-                      name:'闯入报警',
-                      show:true,
-                      data: breakIn,
-                      barGap: '100%',
-                      barCategoryGap: '40%',
-                      symbolSize: 10,
-                      itemStyle: {
-                        normal: {
-                          lineStyle: {
-                            width:5
-                          },
-                        }
-                      }
-                    },
-                  ],})
+                // alertChart.setOption({
+                //   series: [
+                //     {
+                //       type: 'bar',
+                //       name:'摔倒报警',
+                //       show:true,
+                //       data: fall,
+                //       barGap: '100%',
+                //       barCategoryGap: '40%'
+                //     },
+                //     {
+                //       type: 'line',
+                //       name:'闯入报警',
+                //       show:true,
+                //       data: breakIn,
+                //       barGap: '100%',
+                //       barCategoryGap: '40%',
+                //       symbolSize: 10,
+                //       itemStyle: {
+                //         normal: {
+                //           lineStyle: {
+                //             width:5
+                //           },
+                //         }
+                //       }
+                //     },
+                //   ],})
               }
             }
 
@@ -332,7 +325,7 @@ export default {
         //鼠标划过时饼状图上显示的数据
         tooltip: {
           trigger: 'item',
-          formatter: "{a} <br/>{b} : {c} ({d}%)"
+          formatter: "{a} <br/>{b} : {7} (37%)"
         },
         // 图例 标注各种颜色代表的模块
         legend: {
@@ -362,87 +355,87 @@ export default {
       })
     },
     // 绘制情绪状况图
-    initEmotionCharts() {
-      emotionChart = echarts.init(document.getElementById('emotion'));
-      emotionChart.setOption({
-        legend: {
-          orient: 'horizontal',
-          left: 0,
-          right: 0,
-          height: 30,
-          weight: 40,
-          icon: 'circle',
-          data: ['愤怒', '厌恶', '恐慌', '高兴', '平静', '伤心', '惊讶'],
-          show: true
-        },
-        color: ['#d95850', '#a092f1', '#2e4783', '#ff6347', '#a4d8c2', '#82b6e9', '#fad860'],
-        tooltip: {},
-        xAxis: {
-          type: 'value',
-          show: false
-        },
-        yAxis: {
-          how: false,
-          type: 'category'
-        },
-        grid: {
-          left: 6,
-          top: 40,   
-        },
-      });
-    },
+    // initEmotionCharts() {
+    //   emotionChart = echarts.init(document.getElementById('emotion'));
+    //   emotionChart.setOption({
+    //     legend: {
+    //       orient: 'horizontal',
+    //       left: 0,
+    //       right: 0,
+    //       height: 30,
+    //       weight: 40,
+    //       icon: 'circle',
+    //       data: ['愤怒', '厌恶', '恐慌', '高兴', '平静', '伤心', '惊讶'],
+    //       show: true
+    //     },
+    //     color: ['#d95850', '#a092f1', '#2e4783', '#ff6347', '#a4d8c2', '#82b6e9', '#fad860'],
+    //     tooltip: {},
+    //     xAxis: {
+    //       type: 'value',
+    //       show: false
+    //     },
+    //     yAxis: {
+    //       how: false,
+    //       type: 'category'
+    //     },
+    //     grid: {
+    //       left: 6,
+    //       top: 40,
+    //     },
+    //   });
+    // },
     // 绘制摔倒和闯入信息图
-    initAlertCharts() {
-      alertChart = echarts.init(document.getElementById('alert'));
-      alertChart.setOption({
-        tooltip: {
-        },
-        color: [ '#7bd9a5','#8fd3e8'],
-        xAxis: {
-          data: ['4日', '5日', '6日', '7日', '8日', '9日', '10日', '11日', '12日', '13日'],
-          splitNumber: 10,
-          axisTick: {
-            show: true,
-            alignWithLabel: true
-          }
-        },
-        legend: {
-          data: ['报警数', '闯入数']
-        },
-        yAxis: [
-          {
-            name: '报警数',
-            type: 'value',
-            min: 0,
-            max: 15,
-            interval: 1,
-            show: true,
-            axisTick: {
-              show: false,
-              alignWithLabel: true
-            }
-          },
-          {
-            name: '闯入数',
-            type: 'value',
-            min: 0,
-            max: 15,
-            interval: 1,
-            show: true,
-            xisTick: {
-              show: false,
-              alignWithLabel: true
-            }
-          },
-        ],
-        grid: {
-          right: '15%',
-          left: '15%',
-          top: '15%',
-          bottom: '15%',
-        },
-      });
-    },
+    // initAlertCharts() {
+    //   alertChart = echarts.init(document.getElementById('alert'));
+    //   alertChart.setOption({
+    //     tooltip: {
+    //     },
+    //     color: [ '#7bd9a5','#8fd3e8'],
+    //     xAxis: {
+    //       data: ['4日', '5日', '6日', '7日', '8日', '9日', '10日', '11日', '12日', '13日'],
+    //       splitNumber: 10,
+    //       axisTick: {
+    //         show: true,
+    //         alignWithLabel: true
+    //       }
+    //     },
+    //     legend: {
+    //       data: ['报警数', '闯入数']
+    //     },
+    //     yAxis: [
+    //       {
+    //         name: '报警数',
+    //         type: 'value',
+    //         min: 0,
+    //         max: 15,
+    //         interval: 1,
+    //         show: true,
+    //         axisTick: {
+    //           show: false,
+    //           alignWithLabel: true
+    //         }
+    //       },
+    //       {
+    //         name: '闯入数',
+    //         type: 'value',
+    //         min: 0,
+    //         max: 15,
+    //         interval: 1,
+    //         show: true,
+    //         xisTick: {
+    //           show: false,
+    //           alignWithLabel: true
+    //         }
+    //       },
+    //     ],
+    //     grid: {
+    //       right: '15%',
+    //       left: '15%',
+    //       top: '15%',
+    //       bottom: '15%',
+    //     },
+    //   });
+    // },
   },
   mounted() {
     // 初始化并获取数据
@@ -450,21 +443,25 @@ export default {
     // 绘制老人性别比例图
     this.initGenderRateCharts()
     // 绘制老人情绪状况图
-    this.initEmotionCharts()
+    // this.initEmotionCharts()
     // 绘制摔倒报警和闯入信息图
-    this.initAlertCharts()
+    // this.initAlertCharts()
   }
 };
 </script>
-
-<style>
-.title{
-  font-size: 15px;
-  font-style: italic;
+<style scoped>
+.first {
+  height: 100%;
 }
-.data{
+.title {
   font-size: 20px;
-  font-weight: bold;
+  color: black;
 }
-
+.data {
+  font-size: 20px;
+  color: black;
+}
+.el-col {
+  text-align: center;
+}
 </style>

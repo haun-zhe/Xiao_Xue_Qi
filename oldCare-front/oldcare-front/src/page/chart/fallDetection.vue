@@ -15,7 +15,7 @@
       label="时间"
       prop="eventDate">
     </el-table-column>
-    <!-- 图片 -->
+<!--     图片 -->
     <el-table-column prop="eventPhoto" label="图片" align="center">
         <template slot-scope="scope">
             <img :src="scope.row.eventPhoto" style="height: 50px"/>
